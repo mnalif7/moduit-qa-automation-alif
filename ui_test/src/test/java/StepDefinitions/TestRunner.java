@@ -6,9 +6,9 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/java/resources/Features/login.feature", glue = {
-		"StepDefinitions" }, monochrome = true, plugin = { "pretty", "junit:target/JUnitReports/report.xml",
-				"json:target/JSONReports/report.json",
-				"html:target/HtmlReports" })
+		"StepDefinitions" }, monochrome = true, plugin = { "pretty", "junit:target/reports/JUnitReports/report.xml",
+				"json:target/reports/JSONReports/report.json",
+				"html:target/reports/HtmlReports.html" })
 
 public class TestRunner {
 
