@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Selenium Java and Postman Newman
 
 on:
   workflow_dispatch
@@ -25,9 +25,9 @@ jobs:
         run: "npm install -g newman-reporter-htmlextra"
       - name: "Run tests"
         run: |
-        cd api_test
-        newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json
-        -r htmlextra"
+              cd api_test
+              newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json
+              -r htmlextra"
 
   # build_and_ui-test:
   #   runs-on: ubuntu-latest
