@@ -40,4 +40,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test with Selenium JUnit
-      run: mvn compile test
+      run: |
+        cd ui_test
+        mvn compile test
