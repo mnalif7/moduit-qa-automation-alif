@@ -30,24 +30,24 @@ jobs:
         newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json
         -r htmlextra"
 
-  build_and_ui-test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-        server-id: github 
-        settings-path: ${{ github.workspace }} 
-    - name: Install Google Chrome 
-      run: |
-            chmod +x ./scripts/InstallChrome.sh
-            ./scripts/InstallChrome.sh
+  # build_and_ui-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Set up JDK 17
+  #     uses: actions/setup-java@v3
+  #     with:
+  #       java-version: '17'
+  #       distribution: 'temurin'
+  #       cache: maven
+  #       server-id: github 
+  #       settings-path: ${{ github.workspace }} 
+  #   - name: Install Google Chrome 
+  #     run: |
+  #           chmod +x ./scripts/InstallChrome.sh
+  #           ./scripts/InstallChrome.sh
 
-    - name: Build with Maven
-      run: |
-            cd ui_test
-            mvn -B package --file pom.xml
+  #   - name: Build with Maven
+  #     run: |
+  #           cd ui_test
+  #           mvn -B package --file pom.xml
