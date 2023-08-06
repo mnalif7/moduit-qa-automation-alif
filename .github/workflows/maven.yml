@@ -15,8 +15,8 @@ jobs:
   api-test:
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with: 
           node-version: "18"
       - name: "Install newman"
@@ -27,7 +27,11 @@ jobs:
         run: |
               cd api_test
               newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json -r htmlextra
-
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: newman
   # build_and_ui-test:
   #   runs-on: ubuntu-latest
   #   steps:
