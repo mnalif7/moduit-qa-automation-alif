@@ -15,24 +15,24 @@ jobs:
   api-test:
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with: 
-          node-version: "18"
-      - name: "Install newman"
-        run: "npm install -g newman"
-      - name: "Install newman reporter"
-        run: "npm install -g newman-reporter-htmlextra"
-      - name: "Run tests"
-        run: |
-              cd api_test
-              dir
-              newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json -r htmlextra
-      - name: Archive API-test results
-        uses: actions/upload-artifact@v3
-        with:
-          name: API-test results
-          path: api_test/newman
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with: 
+      node-version: "18"
+    - name: "Install newman"
+      run: "npm install -g newman"
+    - name: "Install newman reporter"
+      run: "npm install -g newman-reporter-htmlextra"
+    - name: "Run tests"
+      run: |
+            cd api_test
+            dir
+            newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json -r htmlextra
+    - name: Archive API-test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: API-test results
+        path: api_test/newman
 
   build_and_ui-test:
     runs-on: ubuntu-latest
@@ -56,7 +56,7 @@ jobs:
             cd ui_test
             mvn -B package --file pom.xml
     - name: Archive UI-test results
-        uses: actions/upload-artifact@v3
-        with:
+      uses: actions/upload-artifact@v3
+      with:
           name: UI-test results
           path: ui_test/target/reports
