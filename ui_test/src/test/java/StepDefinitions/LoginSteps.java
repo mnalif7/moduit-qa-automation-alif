@@ -22,6 +22,7 @@ public class LoginSteps {
 		String projectPath = System.getProperty("user.dir");
 		System.out.println("Project path is : " + projectPath);
 
+		System.setProperty("webdriver.gecko.driver", projectPath + "/src/test/resources/drivers/geckodriver.exe");
 		driver = new FirefoxDriver();
 
 		driver.navigate().to("https://www.saucedemo.com/");
