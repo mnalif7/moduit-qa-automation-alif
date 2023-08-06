@@ -32,7 +32,7 @@ jobs:
         run: "newman run Moduit.postman_collection.json -e reqres.in.postman_environment.json
         -r htmlextra"
 
-  build and ui-test:
+  build_and_ui-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
