@@ -22,14 +22,11 @@ public class LoginPage {
     @FindBy(id = "login-button")
     WebElement btn_login;
 
-    @FindBy(partialLinkText = "raghav")
-    List<WebElement> myLinks;
-
-    @FindBy(how = How.ID, using = "name")
-    WebElement abc;
-
     @FindBy(className = "app_logo")
     WebElement txt_logo;
+
+    @FindBy(xpath = "//body/div[@id='root']/div[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[3]")
+    WebElement txt_errorMessage;
 
     WebDriver driver;
 
@@ -52,5 +49,10 @@ public class LoginPage {
 
     public void checkLogoIsDisplayed() {
         txt_logo.isDisplayed();
+    }
+
+    public String getErrorMessage() {
+        String msg = txt_errorMessage.getText();
+        return (msg);
     }
 }
