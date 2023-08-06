@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "0a7a33d4-67c2-472c-a769-ca3fd0983c5e",
+		"name": "Moduit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16117167"
+	},
+	"item": [
+		{
+			"name": "reqres.in",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body partially matches expected data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"morpheus\");\r",
+									"    pm.expect(jsonData.job).to.eql(\"leader\");\r",
+									"    pm.expect(jsonData.id).to.exist;\r",
+									"    pm.expect(jsonData.createdAt).to.exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Success export id from response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.globals.set(\"userId\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{reqres_server}}/api/users",
+							"host": [
+								"{{reqres_server}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"userId\", 2);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has 'data' object with correct properties\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"id\", 2);\r",
+									"    pm.expect(jsonData.data).to.have.property(\"email\", \"janet.weaver@reqres.in\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"first_name\", \"Janet\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"last_name\", \"Weaver\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"avatar\", \"https://reqres.in/img/faces/2-image.jpg\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has 'support' object with correct properties\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"support\");\r",
+									"    pm.expect(jsonData.support).to.have.property(\"url\", \"https://reqres.in/#support-heading\");\r",
+									"    pm.expect(jsonData.support).to.have.property(\"text\", \"To keep ReqRes free, contributions towards server costs are appreciated!\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{reqres_server}}/api/users/:userid",
+							"host": [
+								"{{reqres_server}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userid"
+							],
+							"variable": [
+								{
+									"key": "userid",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"userId\", 2);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has 'name' property and value is 'Moduit'\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"name\", \"Moduit\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has 'updatedAt' property'\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.exist;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Moduit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{reqres_server}}/api/users/:userid",
+							"host": [
+								"{{reqres_server}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userid"
+							],
+							"variable": [
+								{
+									"key": "userid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"userId\", 2);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{reqres_server}}/api/users/:userid",
+							"host": [
+								"{{reqres_server}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userid"
+							],
+							"variable": [
+								{
+									"key": "userid",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
