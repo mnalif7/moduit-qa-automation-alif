@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
-          path: newman
+          path: api_test/newman
   # build_and_ui-test:
   #   runs-on: ubuntu-latest
   #   steps:
