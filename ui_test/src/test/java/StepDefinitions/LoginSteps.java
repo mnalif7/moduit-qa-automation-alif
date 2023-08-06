@@ -2,9 +2,11 @@ package StepDefinitions;
 
 import java.util.concurrent.TimeUnit;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.cucumber.java.en.*;
@@ -19,10 +21,18 @@ public class LoginSteps {
 
 	@Given("user is on login page")
 	public void user_is_on_login_page() {
+
 		String projectPath = System.getProperty("user.dir");
 		System.out.println("Project path is : " + projectPath);
 
-		driver = new FirefoxDriver();
+		// System.setProperty("webdriver.gecko.driver", projectPath +
+		// "/src/test/resources/drivers/geckodriver.exe");
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--no-sandbox");
+		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--headless");
+		driver = new ChromeDriver(options);
 
 		driver.navigate().to("https://www.saucedemo.com/");
 	}
